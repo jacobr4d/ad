@@ -1,6 +1,6 @@
 NB. part a
 ReadFile =: 1!:1
-m =: _ 2 $ _1 ". (LF;' ') stringreplace ReadFile < '1.in'
+m =: _ 2 $ _1 ". (LF;' ') stringreplace ReadFile < 'i.txt'
 +/ | -/ /:~"1 |: m                      
 
 NB. part b
