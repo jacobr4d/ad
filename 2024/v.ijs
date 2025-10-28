@@ -19,8 +19,9 @@ tsort =: 3 : 0
         S =: }: S
         out =: out , u
         iv =: s i. v=: neigh u
-        indeg =: (_1+ iv { indeg) iv} indeg
-        S =: S , (I. 0= iv { indeg) { v
+        D =: _1+ iv { indeg
+        indeg =: D iv} indeg
+        S =: S , v #~ 0= D
     end.
     out
 )
