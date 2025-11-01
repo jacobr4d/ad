@@ -1,7 +1,19 @@
 NB. part a
 n =: # m =: >LF splitstring text =: 1!:1 <'vi.txt'
-next =: ((n-1)&<.)@:(0&>.)@:((4 2 $ _1 0 0 1 1 0 0 _1)&({~)@:{. + }.) NB. (d)irection,i,j |-> i',j'   move in direction of d but stay in bounds
-se =: >@:{.
-dij =: >@:{:
-move =: (1&([`({:@:])`(se@:])}) ; (('#'&=)@:(m&({~))@:(next&.>)@:{: { (({.@:dij , next@:dij) ,: ((4&|)@:(1&+)@:{.@:dij , }.@:dij)))) NB. seen,dij |-> seen',dij' (mark dij as seen, and move dij one step
-+/ +/ +./ > {. move^:(-.@:({: { se))^:_ (seen0 =: (4,n,n) $ 0) ; dij0 =: 0, (I. +/"1 '^'= m) , (I. +/ '^'= m)
+next =: dyad define
+    (n-1)<. 0>. y+ x{ 4 2$ _1 0 0 1 1 0 0 _1
+)
+seen =: monad define NB. has (d)irection,i,j been seen?; avoid infinite loop
+    'se di ij' =: y
+    (<di,ij) { se
+)
+move =: monad define
+    'se di ij' =: y
+    bl =: '#'= m {~ <di next ij NB. blocked
+    (1 (<di,ij)} se); (4| bl+ di); di next^:(-. bl) ij
+)
+se =: 0$~ 4,n,n
+di =: 0
+ij =: (I. +/"1 '^'= m) , (I. +/ '^'= m)
++/ +/ +./ > {. move^:(-.@:seen)^:_ se; di; ij
+NB. part b
