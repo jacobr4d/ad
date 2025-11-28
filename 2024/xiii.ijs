@@ -1,8 +1,11 @@
 NB. satsify     94a + 22b = 840, 
 NB.             34a + 67b = 5400
-NB. or          94 22   a   =   840
-NB.             34 67   b   =   5400
+NB. that is     |94 22|  |a|   =   |840 |
+NB.             |34 67|  |b|   =   |5400|
 NB. minimize    3a + b
-NB. linear programming problem, but I'm lazy and the constraints are small
 ma =: _ 3 2 $ , ".@> t rxfrom~ '[[:digit:]]+'rxmatches t=: 1!:1 <'xiii.txt'
-+/ {{ ({&(/:~c))`(0:)@.(10201&=) ({: y)i.~ (|: 2{. y)&(+/ . *)"1 t=: t/: c=: (+/"1)@:(3 1&*"1) t=: > , { ;~ i. 101 }}"2 ma NB. part i 29517
++/ {{ ({&(/:~c))`(0:)@.(10201&=) ({: y)i.~ (|: 2{. y)&(+/ . *)"1 t=: t/: c=: (+/"1)@:(3 1&*"1) t=: > , { ;~ i. 101 }}"2 ma
+NB. part i 29517
+isinteger=: (-: <.) :: 0:
+<. +/ +/ 3 1*"1 (#~ isinteger"1) {{ if. -. =/ %/"1 |: 2{. y do. (%. |: 2{. y) (+/ . *) {: y elseif. =/ %/"1 |: _2{. y do. (1 0&*)`(0 1&*)@.((i. <./)@:(3 1&*)) {."1 ({: y)%"1 (2){. y else. 43 end. }}"2 ] 0 0 10000000000000 +"1 2 ma
+NB. part ii 103570327981381
