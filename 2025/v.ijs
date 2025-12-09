@@ -4,13 +4,9 @@ ings =: _1". > LF splitstring  > {: (LF,LF) splitstring 1!:1 <'v.txt'
 intsii =: {{
     out =: 0 2$0
     for_int. /:~ ints do.
-        if. 0= # out do.
-            out =: out , int
-        elseif. ({: {: out) < {. int do.
-            out =: out , int
-        else.
-            out =: (}: out) , ({. {: out) , ({: {: out) >. {: int
-        end.
+        if. 0= # out do. out =: out , int
+        elseif. ({: {: out) < {. int do. out =: out , int
+        else. out =: (}: out) , ({. {: out) , ({: {: out) >. {: int end.
     end.
     out
 }}''
